@@ -42,7 +42,6 @@ const pAequorFactory = (num, seq) => {
                     match++;
                 }
             }
-            let percenti = match / obj.length * 100
             let percent = (match / obj.length * 100).toFixed(2);
             return `The two DNA strands have ${percent}% DNA in common.`
         },

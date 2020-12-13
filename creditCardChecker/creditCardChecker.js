@@ -53,16 +53,16 @@ const companiesDigits = [{
 
 // Add your functions below:
 const validateCred = arr => {
-    let arrInverted = arr.reverse(); // make a copy of the array and invert the array right to left.
-    for (let i = 0; i < arrInverted.length; i++) { // check each index and pick out the even numbers
+    let arrInverted = arr.slice().reverse();
+    for (let i = 0; i < arrInverted.length; i++) { 
         if (i % 2 != 0) {
-            arrInverted[i] = arrInverted[i] * 2; // double the value of the array at each even index
+            arrInverted[i] *= 2; 
             if (arrInverted[i] > 9) {
-                arrInverted[i] -= 9; // if the value is higher then 9 deduct it by 9
+                arrInverted[i] -= 9; 
             }
         }
     }
-    let sum = arrInverted.reduce((a, b) => a + b, 0); // plus all numbers of the array
+    let sum = arrInverted.reduce((a, b) => a + b, 0); 
     return sum % 10 == 0;
 };
 
@@ -81,8 +81,9 @@ const idInvalidCardCompanies = arr => {
     for (card of arr) {
         if (!validateCred(card)) {
             companiesDigits.forEach((element) => {
-                if (!companiesInvalidCards.includes(element['company']) && card[0] === element['digit']) {
-                    companiesInvalidCards.push(element['company']);
+                const {company, digit} = element;
+                if (!companiesInvalidCards.includes(company) && card[0] === digit) {
+                    companiesInvalidCards.push(company);
                 }
             });
         }
@@ -92,4 +93,4 @@ const idInvalidCardCompanies = arr => {
 
 // console.log(validateCred(valid3));
 // console.log(findInvalidCards([valid1, valid2, valid3, invalid1, invalid2]));
-// console.log(idInvalidCardCompanies([invalid1, invalid2, valid3]));
+console.log(idInvalidCardCompanies([invalid1, invalid2, valid3]));
